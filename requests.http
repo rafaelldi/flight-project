@@ -1,0 +1,7 @@
+### Unsuccessful request
+GET http://localhost:5000/flights/AAA
+Accept: application/json
+
+### Successful request
+GET http://localhost:5000/flights/BBB
+Accept: application/json

@@ -30,6 +30,7 @@ public static class ApplicationBuilderExtensions
                                 Detail = notFoundException.Message
                             }
                         });
+                        await context.Response.CompleteAsync();
                     }
                 }
             });
