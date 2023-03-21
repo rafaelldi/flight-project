@@ -1,0 +1,32 @@
+﻿services:
+  my-project:
+    image: my-project
+    build:
+      context: .
+      dockerfile: MyProject/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+  
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my-database
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  db:
+    driver: local
